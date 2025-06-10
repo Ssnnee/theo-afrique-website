@@ -1,0 +1,13 @@
+{
+  "version": "7",
+  "dialect": "sqlite",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "6",
+      "when": 1749585535284,
+      "tag": "0000_cynical_mandrill",
+      "breakpoints": true
+    }
+  ]
+}
