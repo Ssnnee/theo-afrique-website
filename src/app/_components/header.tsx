@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { Button } from "~/components/ui/button";
+import { ModeToggle } from "./mode-toggle";
 
 export function Header() {
   const navItems = [
@@ -18,22 +19,20 @@ export function Header() {
           alt="Theo Afrique Logo"
           className="h-8 w-8"
         />
-        <Link href="/" className="text-xl font-bold text-gray-900">
+        <Link href="/" className="text-xl font-bold">
           Theo Afrique
         </Link>
       </div>
       <nav className="space-x-4">
         {navItems.map((item) => (
           <Button key={item.name} variant={"ghost"}>
-            <Link href={item.href} className="text-gray-700 hover:text-gray-900">
+            <Link href={item.href} className="">
               {item.name}
             </Link>
           </Button>
         ))}
       </nav>
-      <Button className="">
-        Toggle Theme
-      </Button>
+      <ModeToggle />
     </header>
   );
 }
