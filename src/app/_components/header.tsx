@@ -23,7 +23,7 @@ export function Header() {
           Theo Afrique
         </Link>
       </div>
-      <nav className="space-x-4">
+      <nav className="space-x-2">
         {navItems.map((item) => (
           <Button key={item.name} variant={"ghost"}>
             <Link href={item.href} className="">
