@@ -71,7 +71,7 @@ export default function ProductCard({ product }: { product: Product }) {
 
         <div className="flex items-center justify-between pt-2">
           <span className="text-lg font-bold text-foreground">
-            ${price.toFixed(2)}
+             {price.toFixed(2)} CFA
           </span>
           <Button className="cursor-pointer" size="sm">Commander</Button>
         </div>
