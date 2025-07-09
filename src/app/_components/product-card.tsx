@@ -18,7 +18,7 @@ export default function ProductCard({ product }: { product: Product }) {
   const { name, description, price, imageUrl, sizes, colors, stock } = product;
 
   return (
-    <div className="max-w-sm rounded-md overflow-hidden not-dark:shadow-md border p-4 space-y-4">
+    <div className="max-w-sm rounded-md overflow-hidden not-dark:shadow-md border p-4 space-y-4 transition duration-300 hover:scale-105">
       <div className="relative w-full aspect-[4/3]">
         <Dialog>
           <DialogTrigger className="absolute inset-0">
