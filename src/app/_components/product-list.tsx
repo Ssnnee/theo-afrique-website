@@ -7,7 +7,6 @@ import { Input } from "~/components/ui/input"
 import { Button } from "~/components/ui/button"
 import {
   Search,
-  Filter,
   X,
   ChevronDown,
   SlidersHorizontal,
@@ -54,7 +53,6 @@ export function ProductList({ products, className, ...props }: ProductsProps) {
   const [viewMode, setViewMode] = useState<ViewMode>("grid")
   const [priceRange, setPriceRange] = useState<[number, number]>([0, 0])
 
-  // Memoized available options and price range
   const { availableSizes, availableColors, minPrice, maxPrice } = useMemo(() => {
     const sizes = [...new Set(products.flatMap((p) => p.sizes))].sort()
     const colors = [...new Set(products.flatMap((p) => p.colors))].sort()
@@ -69,14 +67,12 @@ export function ProductList({ products, className, ...props }: ProductsProps) {
     }
   }, [products])
 
-  // Initialize price range
   useState(() => {
     if (minPrice > 0 && maxPrice > 0) {
       setPriceRange([minPrice, maxPrice])
     }
   })
 
-  // Toggle functions with useCallback for performance
   const toggleSize = useCallback((size: string) => {
     setSelectedSizes((prev) =>
       prev.includes(size) ? prev.filter((s) => s !== size) : [...prev, size]
@@ -89,7 +85,6 @@ export function ProductList({ products, className, ...props }: ProductsProps) {
     )
   }, [])
 
-  // Clear all filters
   const clearFilters = useCallback(() => {
     setSearch("")
     setSelectedSizes([])
@@ -97,7 +92,6 @@ export function ProductList({ products, className, ...props }: ProductsProps) {
     setPriceRange([minPrice, maxPrice])
   }, [minPrice, maxPrice])
 
-  // Filter and sort products
   const filteredAndSortedProducts = useMemo(() => {
     let filtered = products.filter((product) => {
       const matchSearch =
@@ -119,7 +113,6 @@ export function ProductList({ products, className, ...props }: ProductsProps) {
       return matchSearch && matchSizes && matchColors && matchPrice
     })
 
-    // Sort filtered products
     filtered.sort((a, b) => {
       switch (sortBy) {
         case "name":
@@ -138,12 +131,10 @@ export function ProductList({ products, className, ...props }: ProductsProps) {
     return filtered
   }, [search, selectedSizes, selectedColors, priceRange, products, sortBy])
 
-  // Active filters count
   const activeFiltersCount = selectedSizes.length + selectedColors.length + (search ? 1 : 0)
 
   return (
     <div className={`space-y-6 ${className ?? ""}`} {...props}>
-      {/* Header with Search */}
       <div className="flex flex-col gap-4">
         <div className="relative">
           <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
@@ -157,7 +148,6 @@ export function ProductList({ products, className, ...props }: ProductsProps) {
         </div>
       </div>
 
-      {/* Controls Bar */}
       <div className="flex flex-col sm:flex-row gap-4 sm:items-center justify-between">
         <div className="flex items-center gap-2">
           {/* Filters Dropdown */}
@@ -215,22 +205,25 @@ export function ProductList({ products, className, ...props }: ProductsProps) {
                           key={color}
                           onClick={() => toggleColor(color)}
                           variant={selectedColors.includes(color) ? "default" : "outline"}
-                          className="cursor-pointer transition-colors hover:bg-primary/80 text-xs"
+                          className="cursor-pointer transition-colors hover:bg-primary/80 text-xs mb-2"
                         >
                           {color}
                         </Badge>
                       ))}
                     </div>
                   </div>
-                  <DropdownMenuSeparator />
                 </>
               )}
 
+
               {activeFiltersCount > 0 && (
+                <>
+                <DropdownMenuSeparator />
                 <DropdownMenuItem onClick={clearFilters} className="text-muted-foreground">
                   <X className="h-4 w-4 mr-2" />
                   Effacer tous les filtres
                 </DropdownMenuItem>
+                </>
               )}
             </DropdownMenuContent>
           </DropdownMenu>
@@ -327,42 +320,49 @@ export function ProductList({ products, className, ...props }: ProductsProps) {
             </Badge>
           )}
           {selectedSizes.map((size) => (
-            <Badge key={size} variant="secondary" className="flex items-center gap-1">
+            <Badge
+              key={size}
+              onClick={() => toggleSize(size)}
+              variant="secondary"
+              className="flex items-center cursor-pointer gap-1">
               {size}
               <X
                 className="h-3 w-3 cursor-pointer"
-                onClick={() => toggleSize(size)}
               />
             </Badge>
           ))}
           {selectedColors.map((color) => (
-            <Badge key={color} variant="secondary" className="flex items-center gap-1">
-              {color}
+              <Badge
+                key={color}
+                onClick={() => toggleColor(color)} variant="secondary"
+                className="flex items-center cursor-pointer gap-1">
+                {color}
               <X
                 className="h-3 w-3 cursor-pointer"
-                onClick={() => toggleColor(color)}
               />
-            </Badge>
+              </Badge>
           ))}
         </div>
       )}
 
-      {/* Results Summary */}
       <div className="flex items-center justify-between text-sm text-muted-foreground">
         <span>
-          {filteredAndSortedProducts.length} produit{filteredAndSortedProducts.length !== 1 ? "s" : ""} trouvé{filteredAndSortedProducts.length !== 1 ? "s" : ""}
+          {filteredAndSortedProducts.length} produit
+          {filteredAndSortedProducts.length !== 1 ? "s" : ""} trouvé
+          {filteredAndSortedProducts.length !== 1 ? "s" : ""}
         </span>
         {activeFiltersCount > 0 && (
           <span>
-            {activeFiltersCount} filtre{activeFiltersCount !== 1 ? "s" : ""} actif{activeFiltersCount !== 1 ? "s" : ""}
+            {activeFiltersCount} filtre
+            {activeFiltersCount !== 1 ? "s" : ""} actif
+            {activeFiltersCount !== 1 ? "s" : ""}
           </span>
         )}
       </div>
 
-      {/* Product Grid/List */}
       <div className={
         viewMode === "grid"
-          ? "grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6"
+          ? "grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4"
           : "flex flex-col gap-4"
       }>
         {filteredAndSortedProducts.map((product) => (
@@ -373,7 +373,6 @@ export function ProductList({ products, className, ...props }: ProductsProps) {
         ))}
       </div>
 
-      {/* Empty State */}
       {filteredAndSortedProducts.length === 0 && (
         <div className="text-center py-12">
           <div className="mx-auto h-12 w-12 rounded-full bg-muted flex items-center justify-center mb-4">
