@@ -5,6 +5,8 @@ import { Badge } from "~/components/ui/badge"
 import ProductCard from "./product-card"
 import { Input } from "~/components/ui/input"
 import { Button } from "~/components/ui/button"
+import { z } from "zod"
+import { ProductSchema } from "~/types"
 import {
   Search,
   X,
@@ -25,19 +27,9 @@ import {
 } from "~/components/ui/dropdown-menu"
 import { Separator } from "~/components/ui/separator"
 
-type Product = {
-  id: string
-  name: string
-  description: string
-  price: number
-  imageUrl: string
-  sizes: string[]
-  colors: string[]
-  stock: number
-}
 
 type ProductsProps = {
-  products: Product[]
+  products: z.infer<typeof ProductSchema>[]
   className?: string
   categoryId?: number
 } & React.HTMLAttributes<HTMLDivElement>
@@ -96,16 +88,16 @@ export function ProductList({ products, className, ...props }: ProductsProps) {
     let filtered = products.filter((product) => {
       const matchSearch =
         search === "" ||
-        product.name.toLowerCase().includes(search.toLowerCase()) ||
-        product.description.toLowerCase().includes(search.toLowerCase())
+          product.name.toLowerCase().includes(search.toLowerCase()) ||
+          product.description.toLowerCase().includes(search.toLowerCase())
 
       const matchSizes =
         selectedSizes.length === 0 ||
-        selectedSizes.some((size) => product.sizes.includes(size))
+          selectedSizes.some((size) => product.sizes.includes(size))
 
       const matchColors =
         selectedColors.length === 0 ||
-        selectedColors.some((color) => product.colors.includes(color))
+          selectedColors.some((color) => product.colors.includes(color))
 
       const matchPrice =
         product.price >= priceRange[0] && product.price <= priceRange[1]
@@ -218,11 +210,11 @@ export function ProductList({ products, className, ...props }: ProductsProps) {
 
               {activeFiltersCount > 0 && (
                 <>
-                <DropdownMenuSeparator />
-                <DropdownMenuItem onClick={clearFilters} className="text-muted-foreground">
-                  <X className="h-4 w-4 mr-2" />
-                  Effacer tous les filtres
-                </DropdownMenuItem>
+                  <DropdownMenuSeparator />
+                  <DropdownMenuItem onClick={clearFilters} className="text-muted-foreground">
+                    <X className="h-4 w-4 mr-2" />
+                    Effacer tous les filtres
+                  </DropdownMenuItem>
                 </>
               )}
             </DropdownMenuContent>
@@ -332,15 +324,15 @@ export function ProductList({ products, className, ...props }: ProductsProps) {
             </Badge>
           ))}
           {selectedColors.map((color) => (
-              <Badge
-                key={color}
-                onClick={() => toggleColor(color)} variant="secondary"
-                className="flex items-center cursor-pointer gap-1">
-                {color}
+            <Badge
+              key={color}
+              onClick={() => toggleColor(color)} variant="secondary"
+              className="flex items-center cursor-pointer gap-1">
+              {color}
               <X
                 className="h-3 w-3 cursor-pointer"
               />
-              </Badge>
+            </Badge>
           ))}
         </div>
       )}

@@ -2,19 +2,10 @@ import Image from "next/image";
 import { Badge } from "~/components/ui/badge";
 import { Button } from "~/components/ui/button";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "~/components/ui/dialog";
+import { ProductSchema } from "~/types";
+import { z } from 'zod';
 
-type Product = {
-  id: string;
-  name: string;
-  description: string;
-  price: number;
-  imageUrl: string;
-  sizes: string[];
-  colors: string[];
-  stock: number;
-};
-
-export default function ProductCard({ product }: { product: Product }) {
+export default function ProductCard({ product }: { product: z.infer<typeof ProductSchema> }) {
   const { name, description, price, imageUrl, sizes, colors, stock } = product;
 
   return (
@@ -69,7 +60,7 @@ export default function ProductCard({ product }: { product: Product }) {
 
         <p className="text-muted-foreground text-sm">{description}</p>
 
-        <div className="flex items-center justify-between pt-2">
+        <div className="flex items-center justify-between pt-2 gap-3">
           <span className="text-lg font-bold text-foreground">
              {price.toFixed(2)} CFA
           </span>
