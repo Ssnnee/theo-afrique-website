@@ -17,6 +17,11 @@ export function About() {
         <AccordionTrigger>Information sur nos produits</AccordionTrigger>
         <AccordionContent className="flex flex-col gap-4 text-balance">
           <p>
+            Nous sommes Theo Afrique, une entreprise spécialisée dans la
+            conception et la vente de produits de mode et d&apos;accessoires
+            inspirés par la richesse et la diversité de la culture africaine.
+          </p>
+          <p>
             Nos produits sont fabriqués avec des matériaux de haute qualité,
             garantissant durabilité et performance. Chaque article est soumis à
             des contrôles de qualité rigoureux pour assurer la satisfaction de
