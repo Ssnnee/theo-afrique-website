@@ -142,7 +142,6 @@ export function ProductList({ products, className, ...props }: ProductsProps) {
 
       <div className="flex flex-col sm:flex-row gap-4 sm:items-center justify-between">
         <div className="flex items-center gap-2">
-          {/* Filters Dropdown */}
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Button variant="outline" size="sm" className="flex items-center gap-2">
@@ -160,7 +159,6 @@ export function ProductList({ products, className, ...props }: ProductsProps) {
               <DropdownMenuLabel>Filtres</DropdownMenuLabel>
               <DropdownMenuSeparator />
 
-              {/* Size Filters */}
               {availableSizes.length > 0 && (
                 <>
                   <DropdownMenuLabel className="text-xs font-medium text-muted-foreground">
@@ -184,7 +182,6 @@ export function ProductList({ products, className, ...props }: ProductsProps) {
                 </>
               )}
 
-              {/* Color Filters */}
               {availableColors.length > 0 && (
                 <>
                   <DropdownMenuLabel className="text-xs font-medium text-muted-foreground">
@@ -220,7 +217,6 @@ export function ProductList({ products, className, ...props }: ProductsProps) {
             </DropdownMenuContent>
           </DropdownMenu>
 
-          {/* Quick Clear Button */}
           {activeFiltersCount > 0 && (
             <Button
               variant="ghost"
@@ -235,7 +231,6 @@ export function ProductList({ products, className, ...props }: ProductsProps) {
         </div>
 
         <div className="flex items-center gap-2">
-          {/* Sort Dropdown */}
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Button variant="outline" size="sm" className="flex items-center gap-2">
@@ -276,8 +271,7 @@ export function ProductList({ products, className, ...props }: ProductsProps) {
 
           <Separator orientation="vertical" className="h-6" />
 
-          {/* View Mode Toggle */}
-          <div className="flex items-center border rounded-md">
+          <div className="hidden items-center border rounded-md md:flex">
             <Button
               variant={viewMode === "grid" ? "default" : "ghost"}
               size="sm"
@@ -298,7 +292,6 @@ export function ProductList({ products, className, ...props }: ProductsProps) {
         </div>
       </div>
 
-      {/* Active Filters Display */}
       {activeFiltersCount > 0 && (
         <div className="flex flex-wrap items-center gap-2">
           <span className="text-sm text-muted-foreground">Filtres actifs:</span>
