@@ -1,6 +1,8 @@
+import { eq } from "drizzle-orm";
 import { z } from "zod";
 
 import { createTRPCRouter, publicProcedure } from "~/server/api/trpc";
+import { categories, products, productsToCategories } from "~/server/db/schema";
 
 export const productRouter  = createTRPCRouter({
   getAll: publicProcedure.query(async ({ ctx }) => {
@@ -8,11 +10,17 @@ export const productRouter  = createTRPCRouter({
   }),
 
   getByCategory: publicProcedure
-  .input(z.object({ categoryId: z.number() }))
-  .query(async ({ ctx, input }) => {
-    return ctx.db.query.productsToCategories.findMany({
-      where: (productsToCategories, { eq }) =>
-        eq(productsToCategories.categoryId, input.categoryId),
-    });
-  }),
+    .input(z.object({ categoryName: z.string() }))
+    .query(async ({ input, ctx }) => {
+      const rows = await ctx.db
+        .select({
+          product: products,
+        })
+        .from(productsToCategories)
+        .innerJoin(products, eq(products.id, productsToCategories.productId))
+        .innerJoin(categories, eq(categories.id, productsToCategories.categoryId))
+        .where(eq(categories.name, input.categoryName));
+
+      return rows.map((row) => row.product);
+    }),
 });
