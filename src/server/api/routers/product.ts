@@ -9,6 +9,14 @@ export const productRouter  = createTRPCRouter({
     return ctx.db.query.products.findMany({ });
   }),
 
+  getLimited: publicProcedure
+  .input(z.object({ limit: z.number().min(1).max(100) }))
+  .query(async ({ input, ctx }) => {
+    return ctx.db.query.products.findMany({
+      limit: input.limit,
+    });
+  }),
+
   getByCategory: publicProcedure
     .input(z.object({ categoryName: z.string() }))
     .query(async ({ input, ctx }) => {
