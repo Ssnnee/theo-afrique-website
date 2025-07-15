@@ -10,7 +10,6 @@ import Contact from "../_components/contact";
 
 export default async function Home() {
 
-	void api.post.getLatest.prefetch();
 	void api.category.getAll.prefetch();
 
   return (
