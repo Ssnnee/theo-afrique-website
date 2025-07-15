@@ -17,18 +17,25 @@ export const productRouter  = createTRPCRouter({
     });
   }),
 
-  getByCategory: publicProcedure
-    .input(z.object({ categoryName: z.string() }))
-    .query(async ({ input, ctx }) => {
-      const rows = await ctx.db
-        .select({
-          product: products,
-        })
-        .from(productsToCategories)
-        .innerJoin(products, eq(products.id, productsToCategories.productId))
-        .innerJoin(categories, eq(categories.id, productsToCategories.categoryId))
-        .where(eq(categories.name, input.categoryName));
+  getLatest: publicProcedure.query(async ({ ctx }) => {
+    return ctx.db.query.products.findMany({
+      orderBy: (products, { desc }) => [desc(products.createdAt)],
+      limit: 8,
+    });
+  }),
 
-      return rows.map((row) => row.product);
-    }),
+  getByCategory: publicProcedure
+  .input(z.object({ categoryName: z.string() }))
+  .query(async ({ input, ctx }) => {
+    const rows = await ctx.db
+      .select({
+        product: products,
+      })
+      .from(productsToCategories)
+      .innerJoin(products, eq(products.id, productsToCategories.productId))
+      .innerJoin(categories, eq(categories.id, productsToCategories.categoryId))
+      .where(eq(categories.name, input.categoryName));
+
+    return rows.map((row) => row.product);
+  }),
 });
