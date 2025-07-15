@@ -29,15 +29,8 @@ export const ContactSchema = z.object({
     })
 })
 
-const phoneRegex = new RegExp(
-  /^([+]?[\s0-9]+)?(\d{3}|[(]?[0-9]+[)])?([-]?[\s]?[0-9])+$/
-);
-
 export const OrderFormSchema = z.object({
   name: z.string().min(2, { message: "Le nom est requis" }),
-  phone: z.string().regex(phoneRegex, {
-    message: "Numéro de téléphone invalide"
-  }),
   quantity: z
   .number({ invalid_type_error: "Quantité invalide" })
   .min(1, { message: "La quantité doit être d'au moins 1." }),
