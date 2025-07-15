@@ -40,8 +40,8 @@ export const products = createTable(
     description: d.text().notNull(),
     price: d.integer({ mode: "number" }).notNull(),
     imageUrl: d.text({ length: 512 }).notNull(),
-    sizes: d.text().$type<string[]>().notNull(),
-    colors: d.text().$type<string[]>().notNull(),
+    sizes: d.text("sizes", {mode: "json"}).$type<string[]>().notNull().default(sql`[]`),
+    colors: d.text("colors", {mode: "json"}).$type<string[]>().notNull().default(sql`[]`),
     stock: d.integer({ mode: "number" }).notNull(),
     createdAt: d
     .integer({ mode: "timestamp" })
