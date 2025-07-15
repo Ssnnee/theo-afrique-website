@@ -1,17 +1,15 @@
 export function generateWhatsAppLink({
-  phone,
   product,
   name,
-  email,
+  quantity,
   selectedSizes,
   selectedColors,
   customSizing,
   imageUrl,
 }: {
-  phone: string;
   product: { name: string; price: number };
   name: string;
-  email: string;
+  quantity: number;
   selectedSizes: string[];
   selectedColors: string[];
   customSizing?: { shirtSize: string; pantsSize?: string };
@@ -22,6 +20,7 @@ export function generateWhatsAppLink({
     ``,
     `🧥 Produit: ${product.name}`,
     `💰 Prix: ${product.price.toFixed(2)} CFA`,
+    `   Quantity ${quantity}`,
   ];
 
   if (selectedSizes.length > 0) {
@@ -42,7 +41,6 @@ export function generateWhatsAppLink({
 
   lines.push(``);
   lines.push(`👤 Nom: ${name}`);
-  lines.push(`📧 Email: ${email}`);
 
   if (imageUrl) {
     lines.push(`📸 Image du produit: ${imageUrl}`);
