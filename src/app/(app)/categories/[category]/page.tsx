@@ -1,32 +1,16 @@
-import { PageHeader, PageHeaderHeading } from "~/app/_components/page-header";
-import ProductCard from "~/app/_components/product-card";
-import { HydrateClient, api } from "~/trpc/server";
+import { CategoryProducts } from "~/app/_components/category-products";
+import { api, HydrateClient } from "~/trpc/server";
 
 export default async function Home( { params }: { params: { category: string } }) {
-
-  const testProduct = {
-    id: "1",
-    name: "T-shirt Traditionnel",
-    description: "Un t-shirt inspiré par les motifs traditionnels africains, alliant confort et style.",
-    price: 29.99,
-    imageUrl: "/1.jpg",
-    sizes: ["S", "M", "L", "XL"],
-    colors: ["Rouge", "Vert", "Bleu"],
-    stock: 50,
-  };
+  const { category } = await params;
+  void api.product.getByCategory.prefetch({ categoryName: category })
 
   return (
     <HydrateClient>
       <main className="">
-        <PageHeader >
-          <PageHeaderHeading>
-            Découvrez nos produits de la catégorie:  {params.category}
-          </PageHeaderHeading>
-
-          <ProductCard
-            product={testProduct}
-          />
-        </PageHeader>
+        <div className="flex items-center justify-center">
+          <CategoryProducts categoryName={category} />
+        </div>
       </main>
     </HydrateClient>
   );

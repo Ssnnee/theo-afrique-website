@@ -30,7 +30,6 @@ export function CategoriesNav({
     ...links,
   ]
   return (
-    <div className="relative">
       <ScrollArea className="max-w-[600px] lg:max-w-none">
         <div className={cn("flex items-center", className)} {...props}>
           {allCategories.map((category, index) => (
@@ -39,7 +38,7 @@ export function CategoriesNav({
               key={category.href}
               className={cn(
                 "flex h-7 shrink-0 items-center justify-center rounded-full px-4 text-center text-sm font-medium transition-colors hover:text-primary",
-                pathname?.startsWith(category.href) ||
+                pathname?.endsWith(category.href) ||
                   (index === 0 && pathname === "/categories")
                   ? "bg-muted text-primary"
                   : "text-muted-foreground"
@@ -51,6 +50,5 @@ export function CategoriesNav({
         </div>
         <ScrollBar orientation="horizontal" className="invisible" />
       </ScrollArea>
-    </div>
   )
 }

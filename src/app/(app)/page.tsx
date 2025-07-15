@@ -15,7 +15,7 @@ export default async function Home() {
 
   return (
     <HydrateClient>
-      <main className="">
+      <main className="px-3">
         <PageHeader >
           <PageHeaderHeading>
             Bienvenue chez Theo Afrique
@@ -29,7 +29,7 @@ export default async function Home() {
           </PageHeaderDescription>
           <PageActions>
             <Button asChild size="sm" className="">
-              <Link href="/">Nouvelle collection</Link>
+              <Link href="/collection">Nouvelle collection</Link>
             </Button>
           </PageActions>
         </PageHeader>
@@ -39,16 +39,17 @@ export default async function Home() {
         <LimitedProducts limit={8} />
         <section id='contact' className="mx-auto flex max-w-[980px] flex-col items-center gap-2 py-8 md:py-12 md:pb-8 lg:py-24 lg:pb-20">
           <h1 className="text-2xl font-bold mb-4"> Laissez-nous un message </h1>
-          <div className="sm:ml-5">
-          <Contact />
+          <div className="mx-auto">
+            <Contact />
           </div>
         </section>
         <section id='about' className="mx-auto flex max-w-[980px] flex-col items-center gap-2 py-8 md:py-12 md:pb-8 lg:py-24 lg:pb-20">
           <h1 className="text-2xl font-bold mb-4"> À propos de nous</h1>
-          <About />
+          <div className="mx-auto">
+            <About />
+          </div>
         </section>
       </main>
     </HydrateClient>
   );
 }
-
