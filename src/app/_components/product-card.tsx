@@ -4,6 +4,7 @@ import { Button } from "~/components/ui/button";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "~/components/ui/dialog";
 import { ProductSchema } from "~/types";
 import { z } from 'zod';
+import OrderDialog from "./order-dialog";
 
 export default function ProductCard({ product }: { product: z.infer<typeof ProductSchema> }) {
   const { name, description, price, imageUrl, sizes, colors, stock } = product;
@@ -64,7 +65,7 @@ export default function ProductCard({ product }: { product: z.infer<typeof Produ
           <span className="text-lg font-bold text-foreground">
              {price.toFixed(2)} CFA
           </span>
-          <Button className="cursor-pointer" size="sm">Commander</Button>
+          <OrderDialog product={product} />
         </div>
       </div>
     </div>
