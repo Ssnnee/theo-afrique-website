@@ -140,6 +140,7 @@ export default function OrderDialog({
     });
 
     window.open(link, "_blank");
+    form.reset();
     setOpen(false);
   };
 
@@ -214,7 +215,7 @@ export default function OrderDialog({
               )}
             />
 
-            <div className="text-sm text-gray-600 bg-gray-50 p-2 rounded">
+            <div className="text-sm p-2">
               Quantité: {quantity} | Tailles: {summary.sizesCount} | Couleurs: {summary.colorsCount}
             </div>
 
@@ -296,7 +297,7 @@ isDisabled ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'
             )}
 
             {customSizing && (
-              <div className="space-y-2 p-4 bg-blue-50 rounded">
+              <div className="space-y-2 p-4 rounded">
                 <FormField
                   control={form.control}
                   name="shirtSize"
