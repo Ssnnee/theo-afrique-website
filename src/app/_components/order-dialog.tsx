@@ -161,7 +161,7 @@ export default function OrderDialog({
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <Button size="sm" className="flex items-center justify-center gap-2">
+        <Button size="sm" className="flex items-center justify-center gap-2 cursor-pointer">
           <Image
             src="/icons/light-whatsapp.svg"
             alt="WhatsApp Icon"
@@ -341,10 +341,9 @@ isDisabled ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'
                 </AlertDescription>
               </Alert>
             )}
-
             <Button
               type="submit"
-              className="w-full"
+              className="w-full cursor-pointer"
               disabled={validationErrors.length > 0}
             >
               Envoyer sur WhatsApp
