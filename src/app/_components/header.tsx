@@ -14,6 +14,7 @@ export function Header() {
 
   const navItems = [
     { name: "Accueil", href: "/" },
+    { name: "Produits", href: "/categories" },
     { name: "À propos", href: "#about" },
     { name: "Contact", href: "#contact" },
   ];
@@ -29,18 +30,16 @@ export function Header() {
   return (
     <header className="sticky top-0 z-50 border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container-wrapper flex h-16 w-full items-center justify-between px-4">
-        <div className="flex items-center space-x-4">
+        <Link href="/" className="flex items-center space-x-4 text-xl font-bold hover:text-primary transition-colors">
           <Image
             src="/logo.svg"
             width={32}
             height={32}
-            alt="Theo Afrique Logo"
+            alt="Théo Afrique Logo"
             className="h-8 w-8"
           />
-          <Link href="/" className="text-xl font-bold hover:text-primary transition-colors">
-            Theo Afrique
-          </Link>
-        </div>
+          <span> Théo Afrique </span>
+        </Link>
 
         <nav className="hidden md:flex items-center space-x-2">
           {navItems.map((item) => (
