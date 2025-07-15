@@ -5,8 +5,8 @@ import { PageActions, PageHeader, PageHeaderDescription, PageHeaderHeading } fro
 import { Button } from "~/components/ui/button";
 import { About } from "../_components/about";
 import { CategoriesNav } from "../_components/category-nav";
-import { Announcement } from "../_components/announcements";
 import { LimitedProducts } from "../_components/limited-products-list";
+import Contact from "../_components/contact";
 
 export default async function Home() {
 
@@ -37,9 +37,13 @@ export default async function Home() {
           <CategoriesNav />
         </div>
         <LimitedProducts limit={8} />
-        <section className="p-4">
+        <section id='contact' className="mx-auto flex max-w-[980px] flex-col items-center gap-2 py-8 md:py-12 md:pb-8 lg:py-24 lg:pb-20">
+          <h1 className="text-2xl font-bold mb-4"> Laissez-nous un message </h1>
+          <div className="sm:ml-5">
+          <Contact />
+          </div>
         </section>
-        <section className="mx-auto flex max-w-[980px] flex-col items-center gap-2 py-8 md:py-12 md:pb-8 lg:py-24 lg:pb-20">
+        <section id='about' className="mx-auto flex max-w-[980px] flex-col items-center gap-2 py-8 md:py-12 md:pb-8 lg:py-24 lg:pb-20">
           <h1 className="text-2xl font-bold mb-4"> À propos de nous</h1>
           <About />
         </section>

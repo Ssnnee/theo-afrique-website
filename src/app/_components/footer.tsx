@@ -10,7 +10,6 @@ import {
   Mail,
   Phone,
   MapPin,
-  Heart
 } from "lucide-react";
 import { api } from "~/trpc/react";
 import { capitalizeFirstLetters } from "~/lib/utils";
@@ -29,10 +28,9 @@ export function Footer() {
       { name: "Presse", href: "/press" },
     ],
     support: [
-      { name: "Contact", href: "/contact" },
-      { name: "FAQ", href: "/faq" },
-      { name: "Livraison", href: "/livraison" },
-      { name: "Retours", href: "/retours" },
+      { name: "Contact", href: "#contact" },
+      { name: "Livraison", href: "#about" },
+      { name: "Retour", href: "#about" },
     ],
     legal: [
     ],
