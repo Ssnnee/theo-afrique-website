@@ -2,7 +2,7 @@ import { ProductList } from "~/app/_components/product-list";
 import { Products } from "~/app/_components/products";
 import { HydrateClient, api } from "~/trpc/server";
 
-export default async function Home() {
+export default async function CategoriesPage() {
   void api.product.getAll.prefetch();
   const productList= [
     {

@@ -1,7 +1,7 @@
 import { LastestProduct } from "~/app/_components/collection";
 import { HydrateClient, api } from "~/trpc/server";
 
-export default async function Home() {
+export default async function CollectionPage() {
   void api.product.getLatest.prefetch();
 
   return (
