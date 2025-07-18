@@ -1,12 +1,17 @@
 import Link from "next/link";
 
 import { HydrateClient, api } from "~/trpc/server";
-import { PageActions, PageHeader, PageHeaderDescription, PageHeaderHeading } from "../_components/page-header";
+import {
+  PageActions,
+  PageHeader,
+  PageHeaderDescription,
+  PageHeaderHeading
+} from "../../_components/page-header";
 import { Button } from "~/components/ui/button";
-import { About } from "../_components/about";
-import { CategoriesNav } from "../_components/category-nav";
-import { LimitedProducts } from "../_components/limited-products-list";
-import Contact from "../_components/contact";
+import { About } from "../../_components/about";
+import { CategoriesNav } from "../../_components/category-nav";
+import { LimitedProducts } from "../../_components/limited-products-list";
+import Contact from "../../_components/contact";
 
 export default async function Home() {
 
