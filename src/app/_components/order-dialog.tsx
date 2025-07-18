@@ -187,6 +187,10 @@ export default function OrderDialog({
                   <FormControl>
                     <Input {...field} />
                   </FormControl>
+                  <FormDescription>
+                    Mettez un nom ou pseudo par lequel vous souhaitez être
+                    appelé.
+                  </FormDescription>
                   <FormMessage />
                 </FormItem>
               )}
