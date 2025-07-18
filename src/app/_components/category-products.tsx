@@ -1,6 +1,7 @@
 "use client"
 import { api } from "~/trpc/react"
 import { ProductList } from "./product-list";
+import { ProductListSkeleton } from "./product-list-skeleton";
 
 export function CategoryProducts({ categoryName }: { categoryName: string }) {
   const { data: productList = [], isLoading } = api.product.getByCategory.useQuery({
@@ -10,12 +11,12 @@ export function CategoryProducts({ categoryName }: { categoryName: string }) {
   return (
     <div>
       {isLoading ? (
-        <p>Loading...</p>
+        <ProductListSkeleton />
       ) : (
         productList.length > 0 ? (
           <ProductList products={productList} />
         ) : (
-          <p>No products found in this category.</p>
+          <p>Pas de produit trouvé pour cette catégorie.</p>
         )
       )}
     </div>
