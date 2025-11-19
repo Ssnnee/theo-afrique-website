@@ -6,12 +6,12 @@ This is the source code for the congolese clothing brand.
 2. Copy `.env.example` and rename to `.env` and add your keys found in the dashboard.
 
 ```
-    mv .env.example .env
+cp .env.example .env
 ```
 
 3. Run `pnpm install` or `npm install` to install dependencies
 ```
- pnpm install
+pnpm install
 ```
 <!-- 4. Once installed, ./start-database.sh will start the database -->
 <!-- > !NOTE: -->
