@@ -21,17 +21,21 @@ export default function RootLayout({
 	children,
 }: Readonly<{ children: React.ReactNode }>) {
 	return (
-		<html lang="fr" suppressHydrationWarning className={`${geist.variable} scroll-smooth`}>
-      <body>
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange
-        >
-          <TRPCReactProvider>{children}</TRPCReactProvider>
-        </ThemeProvider>
-      </body>
-    </html>
-  );
+		<html
+			lang="fr"
+			suppressHydrationWarning
+			className={`${geist.variable} scroll-smooth`}
+		>
+			<body>
+				<ThemeProvider
+					attribute="class"
+					defaultTheme="system"
+					enableSystem
+					disableTransitionOnChange
+				>
+					<TRPCReactProvider>{children}</TRPCReactProvider>
+				</ThemeProvider>
+			</body>
+		</html>
+	);
 }
