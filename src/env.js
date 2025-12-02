@@ -11,6 +11,10 @@ export const env = createEnv({
 		NODE_ENV: z
 			.enum(["development", "test", "production"])
 			.default("development"),
+		// NextAuth configuration
+		AUTH_SECRET: z.string().min(1),
+		AUTH_RESEND_KEY: z.string().min(1),
+		AUTH_URL: z.string().url().optional(),
 	},
 
 	/**
@@ -29,6 +33,9 @@ export const env = createEnv({
 	runtimeEnv: {
 		DATABASE_URL: process.env.DATABASE_URL,
 		NODE_ENV: process.env.NODE_ENV,
+		AUTH_SECRET: process.env.AUTH_SECRET,
+		AUTH_RESEND_KEY: process.env.AUTH_RESEND_KEY,
+		AUTH_URL: process.env.AUTH_URL,
 		// NEXT_PUBLIC_CLIENTVAR: process.env.NEXT_PUBLIC_CLIENTVAR,
 	},
 	/**
