@@ -5,6 +5,7 @@ import { Geist } from "next/font/google";
 
 import { TRPCReactProvider } from "~/trpc/react";
 import { ThemeProvider } from "./_components/theme-provider";
+import { ToastProvider } from "~/components/ui/toast-provider";
 
 export const metadata: Metadata = {
 	title: "Théo Afrique",
@@ -33,7 +34,9 @@ export default function RootLayout({
 					enableSystem
 					disableTransitionOnChange
 				>
-					<TRPCReactProvider>{children}</TRPCReactProvider>
+					<ToastProvider>
+						<TRPCReactProvider>{children}</TRPCReactProvider>
+					</ToastProvider>
 				</ThemeProvider>
 			</body>
 		</html>

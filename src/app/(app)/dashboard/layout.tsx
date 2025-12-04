@@ -53,36 +53,10 @@ export default async function DashboardLayout({
 			<nav className="border-b border-border bg-muted">
 				<div className="container mx-auto px-4">
 					<div className="flex space-x-6 py-3">
-						<a
-							href="/dashboard"
-							className="text-sm font-medium text-foreground hover:text-primary"
-						>
-							Overview
-						</a>
-						<a
-							href="/dashboard/products"
-							className="text-sm font-medium text-foreground hover:text-primary"
-						>
-							Products
-						</a>
-						<a
-							href="/dashboard/announcements"
-							className="text-sm font-medium text-foreground hover:text-primary"
-						>
-							Announcements
-						</a>
-						<a
-							href="/dashboard/categories"
-							className="text-sm font-medium text-foreground hover:text-primary"
-						>
-							Categories
-						</a>
-						<a
-							href="/dashboard/users"
-							className="text-sm font-medium text-foreground hover:text-primary"
-						>
-							Users
-						</a>
+						<NavLink href="/dashboard">Overview</NavLink>
+						<NavLink href="/dashboard/products">Products</NavLink>
+						<NavLink href="/dashboard/announcements">Announcements</NavLink>
+						<NavLink href="/dashboard/categories">Categories</NavLink>
 					</div>
 				</div>
 			</nav>
@@ -90,5 +64,19 @@ export default async function DashboardLayout({
 			{/* Main Content */}
 			<main className="container mx-auto px-4 py-8">{children}</main>
 		</div>
+	);
+}
+
+function NavLink({
+	href,
+	children,
+}: { href: string; children: React.ReactNode }) {
+	return (
+		<a
+			href={href}
+			className="text-sm font-medium text-foreground hover:text-primary transition-colors relative"
+		>
+			{children}
+		</a>
 	);
 }

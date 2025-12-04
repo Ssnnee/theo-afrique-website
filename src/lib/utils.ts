@@ -37,7 +37,7 @@ export function calculateDiscount(
 
 // Apply announcement discount to a product
 export function applyAnnouncementToProduct(
-	product: { id: number; price: number },
+	product: any,
 	announcement: {
 		discountType: "percentage" | "fixed";
 		discountValue: number;
@@ -47,11 +47,16 @@ export function applyAnnouncementToProduct(
 	} | null,
 	productCategories?: number[],
 ) {
+	// Always return the full product with optional discount fields
+	const baseProduct = {
+		...product,
+		hasDiscount: false,
+		discountedPrice: undefined,
+		discountPercentage: undefined,
+	};
+
 	if (!announcement) {
-		return {
-			...product,
-			hasDiscount: false,
-		};
+		return baseProduct;
 	}
 
 	// Check if announcement applies to this product
@@ -69,10 +74,7 @@ export function applyAnnouncementToProduct(
 			));
 
 	if (!appliesToProduct) {
-		return {
-			...product,
-			hasDiscount: false,
-		};
+		return baseProduct;
 	}
 
 	const { discountedPrice, discountPercentage } = calculateDiscount(
