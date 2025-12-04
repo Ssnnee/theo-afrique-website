@@ -2,18 +2,19 @@
  * Admin User Seed Script
  *
  * This script creates the first admin user in the database.
- * Run with: pnpm tsx src/scripts/seed-admin.ts
+ * Run with: pnpm dlx tsx src/scripts/seed-admin.ts
  */
 
+import "dotenv/config";
 import { eq } from "drizzle-orm";
-import { db } from "~/server/db";
 import { users } from "~/server/db/schema";
+
+const { db } = await import("~/server/db");
 
 async function seedAdmin() {
 	const adminEmail = process.env.ADMIN_EMAIL || "admin@example.com";
 
 	try {
-		// Check if admin already exists
 		const existingAdmin = await db.query.users.findFirst({
 			where: eq(users.email, adminEmail),
 		});
@@ -21,19 +22,17 @@ async function seedAdmin() {
 		if (existingAdmin) {
 			if (existingAdmin.role === "admin") {
 				console.log(`✅ Admin user already exists: ${adminEmail}`);
-				return;
 			} else {
-				// Update existing user to admin
 				await db
 					.update(users)
 					.set({ role: "admin" })
 					.where(eq(users.email, adminEmail));
+
 				console.log(`✅ Updated existing user to admin: ${adminEmail}`);
-				return;
 			}
+			return;
 		}
 
-		// Create new admin user
 		const adminId = crypto.randomUUID();
 		await db.insert(users).values({
 			id: adminId,
@@ -47,27 +46,14 @@ async function seedAdmin() {
 		});
 
 		console.log(`🎉 Created new admin user: ${adminEmail}`);
-		console.log(
-			"📧 Send a magic link login request to this email to access the dashboard",
-		);
-		console.log("🔗 Visit /login and enter the admin email to get started");
+		console.log("📧 Send a magic link login request to access the dashboard");
 	} catch (error) {
 		console.error("❌ Error creating admin user:", error);
 		process.exit(1);
 	}
 }
 
-// Run the script
-if (require.main === module) {
-	seedAdmin()
-		.then(() => {
-			console.log("✨ Admin seeding completed");
-			process.exit(0);
-		})
-		.catch((error) => {
-			console.error("💥 Seeding failed:", error);
-			process.exit(1);
-		});
-}
-
-export default seedAdmin;
+// ESM entrypoint
+await seedAdmin();
+console.log("✨ Admin seeding completed");
+process.exit(0);
